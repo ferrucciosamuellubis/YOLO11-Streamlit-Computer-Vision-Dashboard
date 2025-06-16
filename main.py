@@ -38,8 +38,16 @@ VIDEOS_DICT = {
 }
 
 #Model Configurations
-MODEL_DIR = ROOT/'weights'
-DETECTION_MODEL = MODEL_DIR/'yolo11n.pt'
+from ultralytics import YOLO
+
+# Muat model Anda (ini mungkin akan memicu download atau loading awal)
+# Gunakan file .pt Anda jika itu adalah satu-satunya file yang Anda miliki
+model = YOLO('utils/weights/best_20_epoch.pt')
+
+# Export ulang model ke format PyTorch. Ini akan membuat file baru yang bersih.
+model.export(format='pytorch', path='best_20_epoch_new.pt')
+
+print("Model berhasil diexport ulang ke 'best_20_epoch_new.pt'")
 
 #In case of your custom model
 #DETECTION_MODEL = MODEL_DIR/'custom_model_weight.pt'
